@@ -161,16 +161,34 @@ const currentEvents = {
 
 function getCurrentEvents(request, response){
   // Solution code here...
+  mapCurrentEvents().then(data =>{
+    response.send(data);
+  });
 }
 
 const mapCurrentEvents = () => {
   // Solution code here...
+  let info = currentEvents.news.map(movieInfo =>{
+    let newObj = new Event(movieInfo);
+  });
+  return info;
 }
 
 function Event(obj){
   // Solution code here...
+  this.author = obj.author;
+  this.categories = obj.categories;
+  this.summary = obj.description;
+  this.img_url = obj.url;
+  this.date = obj.published.slice(0,12);
+  this.title = obj.title;
 }
-
+// * author
+// * categories
+// * summary
+// * img_url
+// * date
+// * title
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
@@ -181,6 +199,11 @@ Note: You may not use the array's built-in length property.
 
 const countNumberOfElements = (arr) => {
   // Solution code here...
+  let counter = arr.reduce(accumulator =>{
+    accumulator = accumulator + 1;
+    return accumulator;
+  },0);
+  return counter;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -241,6 +264,11 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
+  let Names = arr.reduce((accumulator,value)=>{
+    accumulator.push(value.name);
+    return accumulator;
+  },[]);
+  return Names;
 };
 
 /* ------------------------------------------------------------------------------------------------
