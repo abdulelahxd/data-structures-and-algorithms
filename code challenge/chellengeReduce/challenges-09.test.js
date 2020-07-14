@@ -27,7 +27,7 @@ const createServer = () => {
 
   // Routes go here
   // Solution code here...
-
+  app.get('/events',getCurrentEvents)
   var server = app.listen(3301, function () {
     var port = server.address().port;
     console.log('Example app listening at port', port);
@@ -161,23 +161,25 @@ const currentEvents = {
 
 function getCurrentEvents(request, response){
   // Solution code here...
-  mapCurrentEvents().then(data =>{
-    response.send(data);
+  return mapCurrentEvents()
+  .then(data => {
+      response.ststus(200).json(data);
   });
 }
 
 const mapCurrentEvents = () => {
   // Solution code here...
-  let info = currentEvents.news.map(movieInfo =>{
-    let newObj = new Event(movieInfo);
-  });
-  return info;
+  let array = currentEvents.news.map(value => {
+    let myEnvent = new Event(value);
+    return myEnvent;
+});
+return array;
 }
 
 function Event(obj){
   // Solution code here...
   this.author = obj.author;
-  this.categories = obj.categories;
+  this.categories = obj.category;
   this.summary = obj.description;
   this.img_url = obj.url;
   this.date = obj.published.slice(0,12);
@@ -282,6 +284,11 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 const reversedString = (str) => {
   // Solution code here...
   // return str.
+  let reversOrder = str.split('');
+    let revers = reversOrder.reduce((acc, value) => {
+        return value + acc;
+    },'');
+    return revers;
 };
 
 /* ------------------------------------------------------------------------------------------------
